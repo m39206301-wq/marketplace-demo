@@ -4,7 +4,7 @@ import { MARKETS } from '../data/markets';
 import SubPageHeader from './SubPageHeader';
 import Footer from './Footer';
 
-export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSignOut, market, onMarketClick, onDistributor }) {
+export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSignOut, market, onMarketClick, onDistributor, onNavigate }) {
   const [notifOn, setNotifOn] = useState(true);
   const m = MARKETS.find((x) => x.id === market);
 
@@ -113,7 +113,7 @@ export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSig
           </div>
         </div>
 
-        <Footer onDistributor={onDistributor} />
+        <Footer onDistributor={onDistributor} onNavigate={onNavigate} />
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ import DeleteConfirm from './components/DeleteConfirm';
 import ShareSheet from './components/ShareSheet';
 import PurchaseModal from './components/PurchaseModal';
 import DistributorPage from './components/DistributorPage';
+import InfoPage from './components/InfoPage';
 import Toast from './components/Toast';
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
   // Page routing
   const [page, setPage] = useState("store");
   const [detailData, setDetailData] = useState(null);
+  const [infoType, setInfoType] = useState(null);
 
   // Search
   const [searchOpen, setSearchOpen] = useState(false);
@@ -99,6 +101,7 @@ export default function App() {
   const openSettings = useCallback(() => setPage("settings"), []);
   const openFavorites = useCallback(() => setPage("favorites"), []);
   const openDistributor = useCallback(() => setPage("distributor"), []);
+  const openInfo = useCallback((type) => { setInfoType(type); setPage("info"); }, []);
   const goBack = useCallback(() => { setPage("store"); setSearchOpen(false); }, []);
   const goBackFromSettings = useCallback(() => setPage("works"), []);
 
@@ -220,7 +223,7 @@ export default function App() {
               loading={loading} favorites={favorites} onToggleFavorite={toggleFavorite} />
           </div>
         ))}
-        <Footer onDistributor={openDistributor} />
+        <Footer onDistributor={openDistributor} onNavigate={openInfo} />
       </div>
 
       {/* Scroll to top */}
@@ -253,18 +256,19 @@ export default function App() {
         onShare={(w) => setShareSheet(true)}
         onDelete={handleDeleteWork}
         onBrowse={goBack}
-        onDistributor={openDistributor} />}
+        onDistributor={openDistributor} onNavigate={openInfo} />}
       {page === "settings" && <SettingsPage onBack={goBackFromSettings}
         isLoggedIn={isLoggedIn} user={user}
         onSignIn={() => setShowLogin(true)}
         onSignOut={handleSignOut}
         market={market}
         onMarketClick={() => setMarketOpen(true)}
-        onDistributor={openDistributor} />}
+        onDistributor={openDistributor} onNavigate={openInfo} />}
       {page === "favorites" && <FavoritesPage favorites={favorites} onBack={goBack}
         onOpenDetail={openDetail} onToggleFavorite={toggleFavorite} market={market}
-        onDistributor={openDistributor} />}
+        onDistributor={openDistributor} onNavigate={openInfo} />}
       {page === "distributor" && <DistributorPage onBack={goBack} />}
+      {page === "info" && infoType && <InfoPage type={infoType} onBack={goBack} />}
 
       {/* Login modal */}
       {showLogin && <LoginModal onClose={() => setShowLogin(false)} onLogin={handleLogin} />}

@@ -92,12 +92,38 @@ export default function Footer({ onDistributor, hideDistributor }) {
         </div>
       )}
 
-      {/* Legal links */}
-      <div style={{ fontSize: "10.5px", color: T.n[400], lineHeight: 1.8, textAlign: "center" }}>
-        Terms of Service · Privacy Policy · About Mori
+      {/* About Mori */}
+      <div style={{
+        background: T.n[0], borderRadius: "14px", padding: "18px 16px",
+        border: "0.5px solid " + T.n[150], marginBottom: "16px",
+      }}>
+        <div style={{
+          fontSize: "18px", fontWeight: 800, color: T.green[800],
+          fontFamily: "'DM Serif Display', Georgia, serif",
+          marginBottom: "8px", textAlign: "center",
+        }}>Mori</div>
+        <div style={{
+          fontSize: "11.5px", color: T.n[500], lineHeight: 1.7, textAlign: "center",
+          marginBottom: "14px",
+        }}>
+          A global design & technology studio on a mission to celebrate cultural diversity.
+          We discover traditional art, patterns, and rituals from communities worldwide — then
+          transform them into modern visual templates that anyone can use. Through design and
+          technology, we make the beauty of every culture accessible, shareable, and alive.
+        </div>
+        <div style={{ height: "0.5px", background: T.n[150], marginBottom: "14px" }}/>
+
+        {/* Policy Links */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+          <span style={{ fontSize: "11px", color: T.n[400], cursor: "pointer" }}>Terms of Service</span>
+          <span style={{ fontSize: "11px", color: T.n[400], cursor: "pointer" }}>Privacy Policy</span>
+          <span style={{ fontSize: "11px", color: T.n[400], cursor: "pointer" }}>Contact Us</span>
+        </div>
       </div>
-      <div style={{ fontSize: "10px", color: T.n[300], marginTop: "4px", textAlign: "center" }}>
-        © 2026 Mori. All rights reserved.
+
+      {/* Copyright */}
+      <div style={{ fontSize: "10px", color: T.n[300], textAlign: "center" }}>
+        © 2026 Mori Studio. All rights reserved.
       </div>
     </div>
   );

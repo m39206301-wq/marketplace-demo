@@ -1,6 +1,6 @@
 import { T, S } from '../data/tokens';
 
-export default function Footer({ onDistributor, hideDistributor }) {
+export default function Footer({ onDistributor, hideDistributor, onNavigate }) {
   return (
     <div style={{ padding: "28px 20px 36px" }}>
       {/* Social Media Follow */}
@@ -97,10 +97,11 @@ export default function Footer({ onDistributor, hideDistributor }) {
         background: T.n[0], borderRadius: "14px", padding: "18px 16px",
         border: "0.5px solid " + T.n[150], marginBottom: "16px",
       }}>
-        <div style={{
+        <div onClick={onNavigate ? () => onNavigate("about") : undefined} style={{
           fontSize: "18px", fontWeight: 800, color: T.green[800],
           fontFamily: "'DM Serif Display', Georgia, serif",
           marginBottom: "8px", textAlign: "center",
+          cursor: onNavigate ? "pointer" : "default",
         }}>Mori</div>
         <div style={{
           fontSize: "11.5px", color: T.n[500], lineHeight: 1.7, textAlign: "center",
@@ -115,9 +116,9 @@ export default function Footer({ onDistributor, hideDistributor }) {
 
         {/* Policy Links */}
         <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-          <span style={{ fontSize: "11px", color: T.n[400], cursor: "pointer" }}>Terms of Service</span>
-          <span style={{ fontSize: "11px", color: T.n[400], cursor: "pointer" }}>Privacy Policy</span>
-          <span style={{ fontSize: "11px", color: T.n[400], cursor: "pointer" }}>Contact Us</span>
+          <span onClick={onNavigate ? () => onNavigate("terms") : undefined} style={{ fontSize: "11px", color: T.n[400], cursor: "pointer", textDecoration: "underline", textDecorationColor: T.n[200], textUnderlineOffset: "2px" }}>Terms of Service</span>
+          <span onClick={onNavigate ? () => onNavigate("privacy") : undefined} style={{ fontSize: "11px", color: T.n[400], cursor: "pointer", textDecoration: "underline", textDecorationColor: T.n[200], textUnderlineOffset: "2px" }}>Privacy Policy</span>
+          <span onClick={onNavigate ? () => onNavigate("about") : undefined} style={{ fontSize: "11px", color: T.n[400], cursor: "pointer", textDecoration: "underline", textDecorationColor: T.n[200], textUnderlineOffset: "2px" }}>About Mori</span>
         </div>
       </div>
 

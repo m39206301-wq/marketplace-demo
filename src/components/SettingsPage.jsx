@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { T, S } from '../data/tokens';
+import { MARKETS } from '../data/markets';
 import SubPageHeader from './SubPageHeader';
 import Footer from './Footer';
 
-export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSignOut }) {
+export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSignOut, market, onMarketClick, onDistributor }) {
   const [notifOn, setNotifOn] = useState(true);
+  const m = MARKETS.find((x) => x.id === market);
 
   return (
     <div style={{
@@ -58,6 +60,22 @@ export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSig
             background: T.n[0], borderRadius: "16px", overflow: "hidden",
             boxShadow: S.card, border: "0.5px solid rgba(0,0,0,0.04)", marginBottom: "12px",
           }}>
+            {/* Region */}
+            <div onClick={onMarketClick} style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "15px 20px", borderBottom: "0.5px solid " + T.n[100],
+              cursor: "pointer",
+            }}>
+              <span style={{ fontSize: "14px", fontWeight: 500, color: T.n[800] }}>Region</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                {m && <span style={{ fontSize: "16px" }}>{m.flag}</span>}
+                <span style={{ fontSize: "13px", color: T.n[500] }}>{m ? m.name_en : "Select"}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={T.n[400]} strokeWidth="2" strokeLinecap="round">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </div>
+            </div>
+            {/* Language */}
             <div style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
               padding: "15px 20px", borderBottom: "0.5px solid " + T.n[100],
@@ -65,6 +83,7 @@ export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSig
               <span style={{ fontSize: "14px", fontWeight: 500, color: T.n[800] }}>Language</span>
               <span style={{ fontSize: "13px", color: T.n[500] }}>English</span>
             </div>
+            {/* Notifications */}
             <div style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
               padding: "15px 20px", borderBottom: "0.5px solid " + T.n[100],
@@ -83,6 +102,7 @@ export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSig
                 }}/>
               </div>
             </div>
+            {/* About */}
             <div style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
               padding: "15px 20px",
@@ -93,7 +113,7 @@ export default function SettingsPage({ onBack, isLoggedIn, user, onSignIn, onSig
           </div>
         </div>
 
-        <Footer />
+        <Footer onDistributor={onDistributor} />
       </div>
     </div>
   );

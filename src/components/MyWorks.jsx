@@ -3,7 +3,7 @@ import SubPageHeader from './SubPageHeader';
 import WorkCard from './WorkCard';
 import Footer from './Footer';
 
-export default function MyWorks({ works, onBack, onSettings, onEdit, onShare, onDelete, onBrowse }) {
+export default function MyWorks({ works, onBack, onSettings, onEdit, onShare, onDelete, onBrowse, onDistributor }) {
   const rightIcons = (
     <div style={{ display: "flex", gap: "8px" }}>
       <div onClick={() => {}} style={{
@@ -62,7 +62,7 @@ export default function MyWorks({ works, onBack, onSettings, onEdit, onShare, on
             ))
           )}
         </div>
-        <Footer />
+        <Footer onDistributor={onDistributor} />
       </div>
     </div>
   );

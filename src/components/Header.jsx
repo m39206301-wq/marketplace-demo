@@ -1,11 +1,9 @@
 import { T, S } from '../data/tokens';
-import { MARKETS } from '../data/markets';
 import StatusBar from './StatusBar';
 
-export default function Header({ scrollY, market, onMarketClick, onWorksClick, onFavoritesClick }) {
+export default function Header({ scrollY, onWorksClick, onFavoritesClick }) {
   const bg = Math.min(scrollY / 50, 0.88);
   const compact = scrollY > 12;
-  const m = MARKETS.find((x) => x.id === market);
   return (
     <div style={{
       position: "sticky", top: 0, zIndex: 20,
@@ -25,17 +23,6 @@ export default function Header({ scrollY, market, onMarketClick, onWorksClick, o
             fontSize: "25px", fontWeight: 800, color: T.green[800],
             fontFamily: "'DM Serif Display', Georgia, serif", letterSpacing: "-0.5px",
           }}>Mori</span>
-          <div onClick={onMarketClick} style={{
-            display: "flex", alignItems: "center", gap: "5px",
-            background: "rgba(240,249,244,0.8)", border: "0.5px solid " + T.green[100],
-            borderRadius: "999px", padding: "4px 10px 4px 8px",
-            fontSize: "12px", color: T.green[700], fontWeight: 500,
-            boxShadow: S.pill, cursor: "pointer",
-          }}>
-            <span style={{ fontSize: "14px" }}>{m.flag}</span>
-            <span>{m.name_en}</span>
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={T.green[400]} strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <div onClick={onFavoritesClick} style={{

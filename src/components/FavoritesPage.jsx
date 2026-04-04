@@ -7,7 +7,7 @@ import SubPageHeader from './SubPageHeader';
 import TemplateCard from './TemplateCard';
 import Footer from './Footer';
 
-export default function FavoritesPage({ favorites, onBack, onOpenDetail, onToggleFavorite, market }) {
+export default function FavoritesPage({ favorites, onBack, onOpenDetail, onToggleFavorite, market, onDistributor }) {
   const favoriteItems = useMemo(() => {
     const items = [];
     const favArr = Array.from(favorites);
@@ -62,7 +62,7 @@ export default function FavoritesPage({ favorites, onBack, onOpenDetail, onToggl
             ))}
           </div>
         )}
-        <Footer />
+        <Footer onDistributor={onDistributor} />
       </div>
     </div>
   );

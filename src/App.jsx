@@ -20,6 +20,7 @@ import LoginModal from './components/LoginModal';
 import DeleteConfirm from './components/DeleteConfirm';
 import ShareSheet from './components/ShareSheet';
 import PurchaseModal from './components/PurchaseModal';
+import DistributorPage from './components/DistributorPage';
 import Toast from './components/Toast';
 
 export default function App() {
@@ -97,6 +98,7 @@ export default function App() {
   const openWorks = useCallback(() => setPage("works"), []);
   const openSettings = useCallback(() => setPage("settings"), []);
   const openFavorites = useCallback(() => setPage("favorites"), []);
+  const openDistributor = useCallback(() => setPage("distributor"), []);
   const goBack = useCallback(() => { setPage("store"); setSearchOpen(false); }, []);
   const goBackFromSettings = useCallback(() => setPage("works"), []);
 
@@ -204,8 +206,7 @@ export default function App() {
         position: "relative", zIndex: 1, height: "100%", overflowY: "auto",
         scrollbarWidth: "none", overscrollBehavior: "contain",
       }}>
-        <Header scrollY={scrollY} market={market}
-          onMarketClick={() => setMarketOpen(true)}
+        <Header scrollY={scrollY}
           onWorksClick={openWorks}
           onFavoritesClick={openFavorites} />
         <SearchBar onClick={() => setSearchOpen(true)} />
@@ -219,7 +220,7 @@ export default function App() {
               loading={loading} favorites={favorites} onToggleFavorite={toggleFavorite} />
           </div>
         ))}
-        <Footer />
+        <Footer onDistributor={openDistributor} />
       </div>
 
       {/* Scroll to top */}
@@ -251,13 +252,19 @@ export default function App() {
         onEdit={(w) => showToast("Opening editor...")}
         onShare={(w) => setShareSheet(true)}
         onDelete={handleDeleteWork}
-        onBrowse={goBack} />}
+        onBrowse={goBack}
+        onDistributor={openDistributor} />}
       {page === "settings" && <SettingsPage onBack={goBackFromSettings}
         isLoggedIn={isLoggedIn} user={user}
         onSignIn={() => setShowLogin(true)}
-        onSignOut={handleSignOut} />}
+        onSignOut={handleSignOut}
+        market={market}
+        onMarketClick={() => setMarketOpen(true)}
+        onDistributor={openDistributor} />}
       {page === "favorites" && <FavoritesPage favorites={favorites} onBack={goBack}
-        onOpenDetail={openDetail} onToggleFavorite={toggleFavorite} market={market} />}
+        onOpenDetail={openDetail} onToggleFavorite={toggleFavorite} market={market}
+        onDistributor={openDistributor} />}
+      {page === "distributor" && <DistributorPage onBack={goBack} />}
 
       {/* Login modal */}
       {showLogin && <LoginModal onClose={() => setShowLogin(false)} onLogin={handleLogin} />}
